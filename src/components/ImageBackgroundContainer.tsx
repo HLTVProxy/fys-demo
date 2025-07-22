@@ -12,15 +12,37 @@ const ImageBackgroundContainer: FC<ImageBackgroundContainerProps> = ({
   imgSrc = "/assets/webarebears.jpg",
   className,
 }) => {
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
   return (
     <div
       className={cn(
-        "fixed inset-0 flex h-screen w-full items-center justify-center bg-cover bg-center bg-no-repeat",
+        "min-h-screen w-full min-w-full",
+        // 電腦版使用 CSS 背景
+        !isMobile && "bg-cover bg-fixed bg-center bg-no-repeat",
         className,
       )}
-      style={imgSrc ? { backgroundImage: `url(${imgSrc})` } : undefined}
+      style={!isMobile ? { backgroundImage: `url(${imgSrc})` } : undefined}
     >
-      {children}
+      {/* 手機版專用的固定背景 */}
+      {isMobile && (
+        <div
+          className="fixed inset-0 -z-10 h-lvh w-screen bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${imgSrc})` }}
+        />
+      )}
+      <div
+        className={cn(
+          "min-h-screen w-full overflow-y-auto pt-14",
+          // 手機版滾動優化
+          "touch-pan-y overscroll-contain",
+        )}
+        style={{
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
+        <div className="container mx-auto py-4">{children}</div>
+      </div>
     </div>
   );
 };

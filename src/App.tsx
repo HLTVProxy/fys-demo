@@ -15,17 +15,15 @@ const App = () => {
           fetch(resource, init).then((res) => res.json()),
       }}
     >
-      <div className="flex h-screen w-full flex-col bg-gray-800">
+      <div className="flex w-full flex-col">
         <Navbar />
         <SplashVideo />
-        <div className="container mx-auto pt-20">
-          <Switch>
-            <Route path="/" component={Home} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/ebans" component={Ebans} />
-            <Route>404: No such page!</Route>
-          </Switch>
-        </div>
+        <Switch>
+          <Route path="/" component={Home} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/ebans" component={Ebans} />
+          <Route>404: No such page!</Route>
+        </Switch>
       </div>
     </SWRConfig>
   );
