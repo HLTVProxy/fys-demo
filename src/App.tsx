@@ -1,6 +1,7 @@
-import { Router, Route } from 'wouter';
-import { SWRConfig } from 'swr';
-import Home from './pages/Home';
+import { Route, Switch } from "wouter";
+import { SWRConfig } from "swr";
+import Home from "./pages/Home";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
@@ -11,10 +12,14 @@ function App() {
           fetch(resource, init).then((res) => res.json()),
       }}
     >
-      <div className="min-h-screen bg-gray-50">
-        <Router>
-          <Route path="/" component={Home} />
-        </Router>
+      <div className="flex h-screen w-full flex-col bg-gray-800">
+        <Navbar />
+        <div className="container mx-auto pt-20">
+          <Switch>
+            <Route path="/" component={Home} />
+            <Route>404: No such page!</Route>
+          </Switch>
+        </div>
       </div>
     </SWRConfig>
   );

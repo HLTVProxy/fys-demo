@@ -1,7 +1,7 @@
 const Home = () => {
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
-      <h1 className="text-2xl font-bold text-center">Home Page</h1>
+    <div className="w-full">
+      <h1 className="text-center text-2xl font-bold text-white">Home Page</h1>
     </div>
   );
 };
