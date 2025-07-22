@@ -1,14 +1,9 @@
-import { cn } from "@/lib/utils";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FC } from "react";
 import { useLocation } from "wouter";
 import { useSplashControl } from "@/hooks/useSplashControl";
 import { useSplashStore } from "@/store/splash";
 
-interface SplashVideoProps {
-  className?: string;
-}
-
-const SplashVideo: React.FC<SplashVideoProps> = ({ className }) => {
+const SplashVideo: FC = () => {
   const [showEnterBtn, setShowEnterBtn] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const isPlayed = useSplashStore((state) => state.isPlayed);
@@ -19,16 +14,6 @@ const SplashVideo: React.FC<SplashVideoProps> = ({ className }) => {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    // iOS Safari 需主動呼叫 play()
-    const tryPlay = () => {
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          console.error("Video playback failed.");
-        });
-      }
-    };
-    tryPlay();
     const handleEnded = () => {
       setShowEnterBtn(true);
     };
@@ -42,10 +27,7 @@ const SplashVideo: React.FC<SplashVideoProps> = ({ className }) => {
     showSplash &&
     !isPlayed && (
       <div
-        className={cn(
-          "fixed inset-0 flex touch-none select-none items-center justify-center overflow-hidden bg-black",
-          className,
-        )}
+        className="fixed inset-0 flex touch-none select-none items-center justify-center overflow-hidden bg-black"
         style={{ WebkitOverflowScrolling: "auto" }}
       >
         <video
