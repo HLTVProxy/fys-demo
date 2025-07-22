@@ -8,12 +8,13 @@ import { Link } from "wouter";
 import FysLogo from "./FysLogo";
 
 import { useState } from "react";
-import { useSplashStore } from "@/store/splash";
 import { cn } from "@/lib/utils";
+import { useSplashControl } from "@/hooks/useSplashControl";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const isPlayed = useSplashStore((state) => state.isPlayed);
+  const { shouldShowSplash } = useSplashControl();
+  const shouldShowMenu = !shouldShowSplash;
 
   return (
     <div className="fixed z-10 w-full bg-black/30 px-4 py-2 text-white backdrop-blur-lg lg:py-4">
@@ -23,7 +24,7 @@ const Navbar = () => {
           <Link href="/" onClick={() => setMenuOpen(false)}>
             <FysLogo />
           </Link>
-          {isPlayed && (
+          {shouldShowMenu && (
             <>
               {/* 電腦版選單，如果播放 SplashVideo 時不顯示 */}
               <NavigationMenu className="hidden w-auto md:flex">
@@ -80,7 +81,7 @@ const Navbar = () => {
           )}
         </div>
         {/* 手機版選單，如果播放 SplashVideo 時不顯示 */}
-        {isPlayed && (
+        {shouldShowMenu && (
           <div
             className={cn(
               "flex w-full origin-top flex-col overflow-hidden transition-all duration-300 md:hidden",

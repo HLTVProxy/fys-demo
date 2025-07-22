@@ -1,11 +1,11 @@
 import { create } from "zustand";
 
 interface SplashState {
-  isPlayed: boolean;
-  setIsPlayed: (played: boolean) => void;
+  hasWatchedSplash: boolean;
+  setHasWatchedSplash: (watched: boolean) => void;
 }
 
 export const useSplashStore = create<SplashState>((set) => ({
-  isPlayed: false,
-  setIsPlayed: (played) => set({ isPlayed: played }),
+  hasWatchedSplash: false,
+  setHasWatchedSplash: (watched) => set({ hasWatchedSplash: watched }),
 }));

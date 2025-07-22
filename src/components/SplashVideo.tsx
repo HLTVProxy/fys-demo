@@ -6,55 +6,61 @@ import { useSplashStore } from "@/store/splash";
 const SplashVideo: FC = () => {
   const [showEnterBtn, setShowEnterBtn] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const isPlayed = useSplashStore((state) => state.isPlayed);
-  const setIsPlayed = useSplashStore((state) => state.setIsPlayed);
+  const setHasWatchedSplash = useSplashStore(
+    (state) => state.setHasWatchedSplash,
+  );
   const [location, navigate] = useLocation();
-  const { showSplash } = useSplashControl();
+  const { shouldShowSplash } = useSplashControl();
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !shouldShowSplash) return;
+
+    setShowEnterBtn(false);
+
     const handleEnded = () => {
       setShowEnterBtn(true);
     };
+
     video.addEventListener("ended", handleEnded);
     return () => {
       video.removeEventListener("ended", handleEnded);
     };
-  }, []);
+  }, [shouldShowSplash]);
+
+  const handleEnterClick = () => {
+    setHasWatchedSplash(true);
+    if (location === "/") {
+      navigate("/dashboard");
+    }
+  };
+
+  if (!shouldShowSplash) return null;
 
   return (
-    showSplash &&
-    !isPlayed && (
-      <div
-        className="fixed inset-0 flex touch-none select-none items-center justify-center overflow-hidden bg-black"
-        style={{ WebkitOverflowScrolling: "auto" }}
-      >
-        <video
-          ref={videoRef}
-          src="/splash.mp4"
-          autoPlay
-          muted
-          playsInline
-          controls={false}
-          preload="auto"
-          className="h-full w-full object-cover"
-        />
-        {showEnterBtn && (
-          <button
-            className="absolute rounded-lg bg-white px-6 py-3 text-black transition-opacity duration-300"
-            onClick={() => {
-              setIsPlayed(true);
-              if (location === "/") {
-                navigate("/dashboard");
-              }
-            }}
-          >
-            Enter
-          </button>
-        )}
-      </div>
-    )
+    <div
+      className="fixed inset-0 z-[1] flex touch-none select-none items-center justify-center overflow-hidden bg-black"
+      style={{ WebkitOverflowScrolling: "auto" }}
+    >
+      <video
+        ref={videoRef}
+        src="/assets/splash.mp4"
+        autoPlay
+        muted
+        playsInline
+        controls={false}
+        preload="auto"
+        className="h-full w-full object-cover"
+      />
+      {showEnterBtn && (
+        <button
+          className="absolute rounded-lg bg-white px-6 py-3 text-black transition-opacity duration-300"
+          onClick={handleEnterClick}
+        >
+          Enter
+        </button>
+      )}
+    </div>
   );
 };
 
