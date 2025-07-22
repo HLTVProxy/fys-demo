@@ -1,25 +1,28 @@
-import { useLocation } from "wouter";
 import { useEffect } from "react";
 import { useSplashStore } from "@/store/splash";
 
-// 設定哪些路徑需要顯示 SplashVideo
-const splashRoutes = ["/", "/dashboard"];
-
-export function useSplashControl() {
-  const [location] = useLocation();
+export function useSplashControl(enableSplash: boolean = false) {
   const hasWatchedSplash = useSplashStore((state) => state.hasWatchedSplash);
   const setHasWatchedSplash = useSplashStore(
     (state) => state.setHasWatchedSplash,
   );
+  const setShouldShowSplash = useSplashStore(
+    (state) => state.setShouldShowSplash,
+  );
 
-  const shouldShowSplash = splashRoutes.includes(location) && !hasWatchedSplash;
+  const shouldShowSplash = enableSplash && !hasWatchedSplash;
 
-  // 如果進入非 splash 路徑，標記為已看過 splash
+  // 設置全局 splash 狀態
   useEffect(() => {
-    if (!splashRoutes.includes(location)) {
+    setShouldShowSplash(shouldShowSplash);
+  }, [shouldShowSplash, setShouldShowSplash]);
+
+  // 如果頁面不需要 splash，標記為已看過 splash
+  useEffect(() => {
+    if (!enableSplash) {
       setHasWatchedSplash(true);
     }
-  }, [location, setHasWatchedSplash]);
+  }, [enableSplash, setHasWatchedSplash]);
 
   return { shouldShowSplash };
 }

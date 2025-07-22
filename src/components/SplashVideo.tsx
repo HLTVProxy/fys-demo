@@ -1,16 +1,18 @@
 import { useEffect, useRef, useState, type FC } from "react";
 import { useLocation } from "wouter";
-import { useSplashControl } from "@/hooks/useSplashControl";
 import { useSplashStore } from "@/store/splash";
 
 const SplashVideo: FC = () => {
   const [showEnterBtn, setShowEnterBtn] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const hasWatchedSplash = useSplashStore((state) => state.hasWatchedSplash);
   const setHasWatchedSplash = useSplashStore(
     (state) => state.setHasWatchedSplash,
   );
   const [location, navigate] = useLocation();
-  const { shouldShowSplash } = useSplashControl();
+
+  // 從 store 中獲取是否應該顯示 splash 的狀態
+  const shouldShowSplash = useSplashStore((state) => state.shouldShowSplash);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -35,7 +37,7 @@ const SplashVideo: FC = () => {
     }
   };
 
-  if (!shouldShowSplash) return null;
+  if (!shouldShowSplash || hasWatchedSplash) return null;
 
   return (
     <div

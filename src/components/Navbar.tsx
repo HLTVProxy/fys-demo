@@ -9,11 +9,11 @@ import FysLogo from "./FysLogo";
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { useSplashControl } from "@/hooks/useSplashControl";
+import { useSplashStore } from "@/store/splash";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { shouldShowSplash } = useSplashControl();
+  const shouldShowSplash = useSplashStore((state) => state.shouldShowSplash);
   const shouldShowMenu = !shouldShowSplash;
 
   return (

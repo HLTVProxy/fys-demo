@@ -1,8 +1,12 @@
 import ImageBackgroundContainer from "@/components/ImageBackgroundContainer";
 import { useLocation } from "wouter";
+import { useSplashControl } from "@/hooks/useSplashControl";
 
 const Home = () => {
   const [, navigate] = useLocation();
+  // 啟用 splash
+  useSplashControl(true);
+
   return (
     <ImageBackgroundContainer>
       <button
