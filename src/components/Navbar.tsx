@@ -4,7 +4,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import FysLogo from "./FysLogo";
 
 import { useState } from "react";
@@ -13,8 +13,9 @@ import { useSplashStore } from "@/store/splash";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [location] = useLocation();
   const shouldShowSplash = useSplashStore((state) => state.shouldShowSplash);
-  const shouldShowMenu = !shouldShowSplash;
+  const shouldShowMenu = !shouldShowSplash && location !== "/";
 
   return (
     <div className="fixed z-10 w-full bg-black/30 px-4 py-2 text-white backdrop-blur-lg lg:py-4">
