@@ -18,13 +18,13 @@ const Navbar = () => {
     <div className="fixed z-10 w-full bg-black/30 px-4 py-2 text-white backdrop-blur-lg">
       <div className="container mx-auto">
         <div className="flex w-full items-center gap-4">
-          {/* Logo，永遠在最左側 */}
+          {/* Logo */}
           <Link href="/">
             <FysLogo />
           </Link>
-          {/* 桌面選單與手機選單按鈕，僅在 isPlayed 為 true 時顯示 */}
           {isPlayed && (
             <>
+              {/* 電腦版選單，如果播放 SplashVideo 時不顯示 */}
               <NavigationMenu className="hidden w-auto md:flex">
                 <NavigationMenuList className="flex items-center justify-center gap-4">
                   <NavigationMenuItem>
@@ -39,7 +39,7 @@ const Navbar = () => {
                   </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>
-              {/* 漢堡選單按鈕 (手機) */}
+              {/* 漢堡選單按鈕 */}
               <button
                 className="ml-auto rounded p-2 md:hidden"
                 onClick={() => setMenuOpen((v) => !v)}
@@ -62,7 +62,7 @@ const Navbar = () => {
             </>
           )}
         </div>
-        {/* 手機選單，僅在 isPlayed 為 true 時顯示 */}
+        {/* 手機版選單，如果播放 SplashVideo 時不顯示 */}
         {isPlayed && (
           <div
             className={cn(
