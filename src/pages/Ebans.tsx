@@ -1,8 +1,10 @@
+import ImageBackgroundContainer from "@/components/ImageBackgroundContainer";
+
 const Ebans = () => {
   return (
-    <div className="w-full">
+    <ImageBackgroundContainer imgSrc="/assets/icebear.jpg">
       <h1 className="text-center text-2xl font-bold text-white">Ebans</h1>
-    </div>
+    </ImageBackgroundContainer>
   );
 };
 
