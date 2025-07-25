@@ -33,7 +33,7 @@ const ImageBackgroundContainer: FC<ImageBackgroundContainerProps> = ({
       )}
       <div
         className={cn(
-          "min-h-screen w-full overflow-y-auto pt-14",
+          "min-h-screen w-full overflow-y-auto pt-16",
           // 手機版滾動優化和防止過度滾動
           "touch-pan-y overscroll-none",
         )}

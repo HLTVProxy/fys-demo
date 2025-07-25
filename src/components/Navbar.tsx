@@ -5,7 +5,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Link, useLocation } from "wouter";
-import FysLogo from "./FysLogo";
+import FysLogo from "./img/FysLogo";
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -18,7 +18,7 @@ const Navbar = () => {
   const shouldShowMenu = !shouldShowSplash && location !== "/";
 
   return (
-    <div className="fixed z-10 w-full bg-black/30 px-4 py-2 text-white backdrop-blur-lg lg:py-4">
+    <div className="fixed z-10 w-full bg-black/30 px-4 py-2 text-white backdrop-blur-lg">
       <div className="container mx-auto">
         <div className="flex w-full items-center gap-4">
           {/* Logo */}
