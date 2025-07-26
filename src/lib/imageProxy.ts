@@ -15,12 +15,6 @@ export function getProxiedImageUrl(imageUrl: string): string {
 
   // 如果是 fyscs.cn 的圖片
   if (imageUrl.includes("fyscs.cn/image/")) {
-    // 檢查是否是已知有問題的 URL
-    if (imageUrl.includes("logo-256.png")) {
-      console.warn("檢測到受防護的圖片 URL，使用本地替代方案:", imageUrl);
-      // 使用本地存儲的 logo 或其他替代方案
-      return "/assets/logo-fallback.png"; // 你可以在 public/assets/ 中放置替代圖片
-    }
     return imageUrl.replace("https://fyscs.cn", "/proxy-logo");
   }
 

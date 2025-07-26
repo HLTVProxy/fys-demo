@@ -9,7 +9,6 @@ const Bans = () => {
   // 不啟用 splash
   useSplashControl(false);
   const { data, isLoading } = useBans();
-  console.log("data", data);
 
   return (
     <ImageBackgroundContainer imgSrc="/assets/icebear.jpg">

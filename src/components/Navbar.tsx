@@ -10,12 +10,14 @@ import FysLogo from "./img/FysLogo";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useSplashStore } from "@/store/splash";
+import { useAuthStore } from "@/store/auth";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [location] = useLocation();
   const shouldShowSplash = useSplashStore((state) => state.shouldShowSplash);
   const shouldShowMenu = !shouldShowSplash && location !== "/";
+  const isLogin = useAuthStore((state) => state.isLogin);
 
   return (
     <div className="fixed z-10 w-full bg-black/30 px-4 py-2 text-white backdrop-blur-lg">
@@ -37,7 +39,22 @@ const Navbar = () => {
                   </NavigationMenuItem>
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link href="/bans">Bans</Link>
+                      <Link
+                        href="/bans"
+                        className={
+                          isLogin
+                            ? "text-white"
+                            : "cursor-not-allowed text-gray-400 hover:text-gray-400"
+                        }
+                        onClick={(e) => {
+                          if (!isLogin) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                          }
+                        }}
+                      >
+                        Bans
+                      </Link>
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 </NavigationMenuList>
@@ -101,8 +118,19 @@ const Navbar = () => {
             </Link>
             <Link
               href="/bans"
-              className="block w-full border-b border-white py-4 text-left"
-              onClick={() => setMenuOpen(false)}
+              className={cn(
+                "block w-full border-b border-white py-4 text-left",
+                !isLogin &&
+                  "cursor-not-allowed text-gray-400 hover:text-gray-400",
+              )}
+              onClick={(e) => {
+                if (!isLogin) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                } else {
+                  setMenuOpen(false);
+                }
+              }}
             >
               Bans
             </Link>

@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <ImageBackgroundContainer>
       <button
-        className="rounded-lg bg-white px-6 py-3 text-black shadow-lg transition-opacity duration-300"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white px-6 py-3 text-black shadow-lg transition-opacity duration-300"
         onClick={() => {
           navigate("/dashboard");
         }}
