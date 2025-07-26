@@ -4,7 +4,7 @@ import { useSplashControl } from "@/hooks/useSplashControl";
 
 const Dashboard = () => {
   // 啟用 splash
-  useSplashControl(false);
+  useSplashControl(true);
 
   return (
     <ImageBackgroundContainer>

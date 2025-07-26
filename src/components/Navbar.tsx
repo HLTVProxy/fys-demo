@@ -37,7 +37,7 @@ const Navbar = () => {
                   </NavigationMenuItem>
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link href="/ebans">Ebans</Link>
+                      <Link href="/bans">Bans</Link>
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 </NavigationMenuList>
@@ -100,11 +100,11 @@ const Navbar = () => {
               Dashboard
             </Link>
             <Link
-              href="/ebans"
+              href="/bans"
               className="block w-full border-b border-white py-4 text-left"
               onClick={() => setMenuOpen(false)}
             >
-              Ebans
+              Bans
             </Link>
           </div>
         )}

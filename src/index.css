@@ -72,3 +72,49 @@
     overscroll-behavior: none;
   }
 }
+
+/* 自定義 scrollbar 樣式 */
+@layer utilities {
+  /* Webkit 瀏覽器 (Chrome, Safari, Edge) */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.5); /* gray-400 with opacity */
+    border-radius: 4px;
+    border: none;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(156, 163, 175, 0.7); /* 稍微增加不透明度，但仍然很淡 */
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  }
+
+  /* 可選：完全透明的 scrollbar 類 */
+  .scrollbar-transparent::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.3);
+  }
+
+  .scrollbar-transparent::-webkit-scrollbar-thumb:hover {
+    background: rgba(156, 163, 175, 0.5);
+  }
+
+  .scrollbar-transparent {
+    scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
+  }
+}

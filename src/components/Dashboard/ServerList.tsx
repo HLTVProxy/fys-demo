@@ -10,17 +10,17 @@ import {
 import CS2Logo from "../img/CS2Logo";
 import CSGOLogo from "../img/CSGOLogo";
 import { Spinner } from "../Spinner";
+import LiquidGlassContainer from "../LiquidGlassContainer";
 
 const ServerList = () => {
   const { servers, isLoading } = useDashboard();
-  console.log("servers", servers);
 
   return (
     <div>
       <h1 className="mb-6 text-center text-4xl font-bold text-white">
         Server List
       </h1>
-      <div className="bg-black/30 px-4 py-2 text-white backdrop-blur-lg lg:py-4">
+      <LiquidGlassContainer>
         <Table>
           <TableHeader>
             <TableRow className="hover:bg-color-none">
@@ -91,7 +91,7 @@ const ServerList = () => {
             </TableBody>
           )}
         </Table>
-      </div>
+      </LiquidGlassContainer>
     </div>
   );
 };

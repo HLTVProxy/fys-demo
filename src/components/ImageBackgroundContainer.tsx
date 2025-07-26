@@ -42,7 +42,7 @@ const ImageBackgroundContainer: FC<ImageBackgroundContainerProps> = ({
           overscrollBehavior: "none",
         }}
       >
-        <div className="container mx-auto py-4">{children}</div>
+        {children}
       </div>
     </div>
   );

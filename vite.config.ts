@@ -29,6 +29,36 @@ export default defineConfig(({ mode }) => {
             });
           },
         },
+        // 添加圖片代理
+        "/proxy-image": {
+          target: "https://avatars.fyscs.cn",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/proxy-image/, ""),
+          configure: (proxy) => {
+            proxy.on("proxyReq", (proxyReq) => {
+              // 設置必要的 headers 以避免 CORS 問題
+              proxyReq.setHeader(
+                "User-Agent",
+                "Mozilla/5.0 (compatible; FysDemo/1.0)",
+              );
+              proxyReq.setHeader("Referer", "https://fyscs.cn/");
+            });
+          },
+        },
+        "/proxy-logo": {
+          target: "https://fyscs.cn",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/proxy-logo/, ""),
+          configure: (proxy) => {
+            proxy.on("proxyReq", (proxyReq) => {
+              proxyReq.setHeader(
+                "User-Agent",
+                "Mozilla/5.0 (compatible; FysDemo/1.0)",
+              );
+              proxyReq.setHeader("Referer", "https://fyscs.cn/");
+            });
+          },
+        },
       },
     },
   };
